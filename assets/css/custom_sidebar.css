@@ -1,0 +1,96 @@
+
+/* SIDEBAR BACKGROUND */
+
+#accordionSidebar{
+    background: linear-gradient(
+        180deg,
+        #f8f5f2 0%,
+        #efe7dd 100%
+    ) !important;
+}
+
+
+
+/* BRAND */
+
+.sidebar-brand-text{
+    color:#7f5539 !important;
+    font-weight:700;
+    font-size:20px;
+}
+
+.sidebar-brand-icon i{
+    color:#b08968 !important;
+}
+
+
+
+/* MENU */
+
+.sidebar .nav-item .nav-link{
+
+    color:#6b4f4f !important;
+
+    border-radius:14px;
+
+    margin:6px 12px;
+
+    padding:12px 16px;
+
+    transition:0.3s;
+}
+
+
+
+/* HOVER */
+
+.sidebar .nav-item .nav-link:hover{
+
+    background:#f1e3d3;
+
+    transform:translateX(4px);
+}
+
+
+
+/* ACTIVE MENU */
+
+.sidebar .nav-item.active .nav-link{
+
+    background:#ffffff !important;
+
+    color:#7f5539 !important;
+
+    box-shadow:0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+
+/* ICON */
+
+.sidebar .nav-item .nav-link i{
+
+    color:#b08968 !important;
+}
+
+
+
+/* HEADING */
+
+.sidebar-heading{
+
+    color:#b08968 !important;
+
+    font-size:12px;
+
+    font-weight:700;
+}
+
+
+
+/* DIVIDER */
+
+.sidebar-divider{
+
+    border-color:#d6ccc2 !important;
+}

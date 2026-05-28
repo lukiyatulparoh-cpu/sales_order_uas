@@ -1,0 +1,113 @@
+
+/* SIDEBAR */
+
+.sidebar {
+
+    background: linear-gradient(
+        180deg,
+        #f6e7d8 0%,
+        #f3d5b5 100%
+    ) !important;
+}
+
+
+
+/* BRAND */
+
+.sidebar-brand {
+
+    height: 80px;
+
+    font-size: 20px;
+
+    font-weight: bold;
+
+    letter-spacing: 1px;
+
+    color: #7f5539 !important;
+}
+
+
+
+/* MENU */
+
+.sidebar .nav-item .nav-link {
+
+    padding: 14px 20px;
+
+    margin: 6px 12px;
+
+    border-radius: 14px;
+
+    transition: 0.3s;
+
+    color: #5e503f !important;
+
+    font-weight: 500;
+}
+
+
+
+/* ICON */
+
+.sidebar .nav-link i {
+
+    margin-right: 10px;
+
+    color: #9c6644 !important;
+}
+
+
+
+/* HOVER */
+
+.sidebar .nav-item.active .nav-link {
+
+    background: #ffffff;
+
+    color: #7f5539 !important;
+
+    font-weight: bold;
+
+    box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+
+    width: calc(100% - 20px);
+}
+
+
+/* ACTIVE MENU */
+
+.sidebar .nav-item.active .nav-link {
+
+    background: #ffffff;
+
+    color: #7f5539 !important;
+
+    font-weight: bold;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+
+/* SIDEBAR TITLE */
+
+.sidebar-heading {
+
+    color: #9c6644 !important;
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    margin-top: 10px;
+}
+
+
+
+/* DIVIDER */
+
+.sidebar-divider {
+
+    border-top: 1px solid rgba(126,87,68,0.2);
+}

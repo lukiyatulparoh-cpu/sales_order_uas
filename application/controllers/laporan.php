@@ -1,114 +1,178 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class laporan extends CI_Controller {
+class Laporan extends CI_Controller {
 
     public function __construct()
     {
         parent::__construct();
 
         if(!$this->session->userdata('login')){
-            redirect('login');
-        }
-    }
-
-    public function peminjaman()
-    {
-        $bulan= $this->input->get('bulan');
-
-        $this->db->select('peminjaman.*, anggota.nama');
-        $this->db->from('peminjaman');
-        $this->db->join('anggota', 'anggota.id = peminjaman.anggota_id');
-
-        if($bulan){
-            $this->db->where('DATE_FORMAT(tanggal_pinjam,"%Y-%m")=', $bulan);
+            redirect('auth');
         }
 
-        $data['data']= $this->db->get()->result();
-        $data['bulan']= $bulan;
-
-        $this->load->view('templates/header');
-        $this->load->view('templates/sidebar');
-        $this->load->view('templates/topbar');
-        $this->load->view('laporan/peminjaman', $data);
-        $this->load->view('templates/footer');
+        $this->load->database();
     }
 
-    public function buku()
-{
-    $penulis = $this->input->get('penulis');
-
-    $this->db->select('*');
-    $this->db->from('buku');
-
-    if($penulis){
-        $this->db->where('penulis', $penulis);
-    }
-
-    $data['data'] = $this->db->get()->result();
-
-    $data['penulis'] = $penulis;
-
-    $data['list_penulis'] = $this->db
-        ->select('penulis')
-        ->distinct()
-        ->get('buku')
-        ->result();
-
-    $this->load->view('templates/header');
-    $this->load->view('templates/sidebar');
-    $this->load->view('templates/topbar');
-    $this->load->view('laporan/buku', $data);
-    $this->load->view('templates/footer');
-}
-    public function anggota()
+    // =========================
+    // LAPORAN SALES
+    // =========================
+    public function sales()
     {
-        $data['data'] = $this->db->get('anggota')->result();
+
+        $query = $this->db->query("
+            SELECT
+                sales.id_sales,
+                sales.nama_sales,
+
+                COUNT(orders.id_order) AS jumlah_order,
+
+                SUM(detail_order.qty) AS produk_terjual,
+
+                SUM(detail_order.subtotal) AS total_penjualan
+
+            FROM sales
+
+            LEFT JOIN orders
+                ON sales.id_sales = orders.id_sales
+
+            LEFT JOIN detail_order
+                ON orders.id_order = detail_order.id_order
+
+            GROUP BY sales.id_sales
+        ");
+
+        $data['sales'] = $query->result();
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar');
-        $this->load->view('laporan/anggota', $data);
+
+        $this->load->view('laporan/sales', $data);
+
         $this->load->view('templates/footer');
     }
 
-    public function kategori()
+
+
+    // =========================
+    // LAPORAN PRODUK
+    // =========================
+    public function produk()
     {
-        $data['data'] = $this->db->get('kategori')->result();
+
+        $query = $this->db->query("
+            SELECT
+
+                produk.kode_produk,
+                produk.nama_produk,
+                produk.harga,
+
+                SUM(detail_order.qty) AS qty_terjual,
+
+                SUM(detail_order.subtotal) AS total_penjualan
+
+            FROM produk
+
+            LEFT JOIN detail_order
+                ON produk.id_produk = detail_order.id_produk
+
+            GROUP BY produk.id_produk
+        ");
+
+        $data['produk'] = $query->result();
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar');
-        $this->load->view('laporan/kategori', $data);
+
+        $this->load->view('laporan/produk', $data);
+
         $this->load->view('templates/footer');
     }
-    public function cetak_buku()
-{
-    $penulis = $this->input->get('penulis');
 
-    $this->db->from('buku');
 
-    if($penulis){
-        $this->db->like('penulis', $penulis);
+
+    // =========================
+    // LAPORAN PERIODE
+    // =========================
+    public function periode()
+    {
+
+        $tanggal_awal =
+            $this->input->get('tanggal_awal');
+
+        $tanggal_akhir =
+            $this->input->get('tanggal_akhir');
+
+
+
+        $this->db->select("
+            orders.kode_order,
+            orders.tanggal,
+
+            sales.id_sales,
+            sales.nama_sales,
+
+            pelanggan.nama_pelanggan AS pelanggan,
+
+            produk.nama_produk AS produk,
+
+            detail_order.qty,
+
+            detail_order.subtotal AS total,
+
+            orders.status
+        ");
+
+        $this->db->from('orders');
+
+        $this->db->join(
+            'sales',
+            'orders.id_sales = sales.id_sales'
+        );
+
+        $this->db->join(
+            'pelanggan',
+            'orders.id_pelanggan = pelanggan.id_pelanggan'
+        );
+
+        $this->db->join(
+            'detail_order',
+            'orders.id_order = detail_order.id_order'
+        );
+
+        $this->db->join(
+            'produk',
+            'detail_order.id_produk = produk.id_produk'
+        );
+
+
+
+        // FILTER TANGGAL
+        if($tanggal_awal && $tanggal_akhir){
+
+            $this->db->where(
+                'orders.tanggal >=',
+                $tanggal_awal
+            );
+
+            $this->db->where(
+                'orders.tanggal <=',
+                $tanggal_akhir
+            );
+        }
+
+        $data['sales'] = $this->db->get()->result();
+
+
+
+        $this->load->view('templates/header');
+        $this->load->view('templates/sidebar');
+        $this->load->view('templates/topbar');
+
+        $this->load->view('laporan/periode', $data);
+
+        $this->load->view('templates/footer');
     }
-
-    $data['data'] = $this->db->get()->result();
-    $data['penulis'] = $penulis;
-
-    $this->load->view('laporan/cetak_buku', $data);
-}
-
-public function cetak_anggota()
-{
-    $data['data'] = $this->db->get('anggota')->result();
-
-    $this->load->view('laporan/cetak_anggota', $data);
-}
-
-public function cetak_kategori()
-{
-    $data['data'] = $this->db->get('kategori')->result();
-
-    $this->load->view('laporan/cetak_kategori', $data);
-}
 }
