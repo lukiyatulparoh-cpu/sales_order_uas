@@ -3,21 +3,40 @@
 
     <!-- TITLE -->
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 text-gray-800 font-weight-bold">
-            Data Produk
-        </h1>
 
-        <a href="<?= base_url('produk/tambah') ?>" 
-           class="btn shadow-sm"
+    <h1 class="h3 text-gray-800 font-weight-bold">
+        Data Produk
+    </h1>
+
+    <div>
+
+        <a href="<?= base_url('produk/tambah') ?>"
+           class="btn shadow-sm mr-2"
            style="
            background:#9c6b3f;
            color:white;
            border-radius:12px;
            padding:10px 18px;
            ">
-           + Tambah Produk
+           <i class="fas fa-plus"></i>
+           Tambah Produk
         </a>
+
+        <a href="<?= base_url('produk/tambah_stok') ?>"
+           class="btn shadow-sm"
+           style="
+           background:#28a745;
+           color:white;
+           border-radius:12px;
+           padding:10px 18px;
+           ">
+           <i class="fas fa-boxes"></i>
+           Tambah Stok
+        </a>
+
     </div>
+
+</div>
 
     <!-- CARD -->
     <div class="card border-0 shadow-sm"

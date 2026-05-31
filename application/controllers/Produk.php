@@ -58,6 +58,60 @@ class Produk extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+   public function tambah_stok()
+{
+    $data['produk'] =
+        $this->db
+        ->get('produk')
+        ->result();
+
+    $this->load->view('templates/header');
+    $this->load->view('templates/sidebar');
+    $this->load->view('templates/topbar');
+
+    $this->load->view(
+        'produk/tambah_stok',
+        $data
+    );
+
+    $this->load->view('templates/footer');
+}
+
+    public function simpan_stok()
+{
+    $id_produk =
+        $this->input->post('id_produk');
+
+    $jumlah_stok =
+        $this->input->post('jumlah_stok');
+
+    $produk =
+        $this->db
+        ->get_where(
+            'produk',
+            [
+                'id_produk' => $id_produk
+            ]
+        )->row();
+
+    $stok_baru =
+        $produk->stok +
+        $jumlah_stok;
+
+    $this->db->where(
+        'id_produk',
+        $id_produk
+    );
+
+    $this->db->update(
+        'produk',
+        [
+            'stok' => $stok_baru
+        ]
+    );
+
+    redirect('produk');
+}
     // =========================
     // SIMPAN DATA
     // =========================

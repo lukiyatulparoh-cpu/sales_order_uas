@@ -1,3 +1,4 @@
+
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
@@ -8,7 +9,7 @@ class Laporan extends CI_Controller {
         parent::__construct();
 
         if(!$this->session->userdata('login')){
-            redirect('auth');
+            redirect('login');
         }
 
         $this->load->database();
@@ -19,160 +20,186 @@ class Laporan extends CI_Controller {
     // =========================
     public function sales()
     {
+        $id_sales = $this->input->get('id_sales');
 
-        $query = $this->db->query("
-            SELECT
-                sales.id_sales,
-                sales.nama_sales,
+        $this->db->select("
+            sales.id_sales,
+            sales.nama_sales,
 
-                COUNT(orders.id_order) AS jumlah_order,
+            COUNT(sales_order.id_order) AS jumlah_order,
 
-                SUM(detail_order.qty) AS produk_terjual,
+            IFNULL(
+                SUM(sales_order.qty),
+                0
+            ) AS total_qty,
 
-                SUM(detail_order.subtotal) AS total_penjualan
-
-            FROM sales
-
-            LEFT JOIN orders
-                ON sales.id_sales = orders.id_sales
-
-            LEFT JOIN detail_order
-                ON orders.id_order = detail_order.id_order
-
-            GROUP BY sales.id_sales
+            IFNULL(
+                SUM(sales_order.total_harga),
+                0
+            ) AS total_penjualan
         ");
 
-        $data['sales'] = $query->result();
+        $this->db->from('sales');
+
+        $this->db->join(
+            'sales_order',
+            'sales.id_sales = sales_order.id_sales',
+            'left'
+        );
+
+        if(!empty($id_sales))
+        {
+            $this->db->where(
+                'sales.id_sales',
+                $id_sales
+            );
+        }
+
+        $this->db->group_by(
+            'sales.id_sales'
+        );
+
+        $data['sales'] =
+            $this->db->get()->result();
+
+        $data['list_sales'] =
+            $this->db->get('sales')->result();
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar');
-
         $this->load->view('laporan/sales', $data);
-
         $this->load->view('templates/footer');
     }
-
-
 
     // =========================
     // LAPORAN PRODUK
     // =========================
     public function produk()
     {
+        $id_produk =
+            $this->input->get('id_produk');
 
-        $query = $this->db->query("
-            SELECT
+        $this->db->select("
+            produk.id_produk,
+            produk.kode_produk,
+            produk.nama_produk,
+            produk.harga,
+            produk.stok,
 
-                produk.kode_produk,
-                produk.nama_produk,
-                produk.harga,
+            IFNULL(
+                SUM(sales_order.qty),
+                0
+            ) AS qty_terjual,
 
-                SUM(detail_order.qty) AS qty_terjual,
-
-                SUM(detail_order.subtotal) AS total_penjualan
-
-            FROM produk
-
-            LEFT JOIN detail_order
-                ON produk.id_produk = detail_order.id_produk
-
-            GROUP BY produk.id_produk
+            IFNULL(
+                SUM(sales_order.total_harga),
+                0
+            ) AS total_penjualan
         ");
 
-        $data['produk'] = $query->result();
+        $this->db->from('produk');
+
+        $this->db->join(
+            'sales_order',
+            'produk.id_produk = sales_order.id_produk',
+            'left'
+        );
+
+        if(!empty($id_produk))
+        {
+            $this->db->where(
+                'produk.id_produk',
+                $id_produk
+            );
+        }
+
+        $this->db->group_by(
+            'produk.id_produk'
+        );
+
+        $data['produk'] =
+            $this->db->get()->result();
+
+        $data['list_produk'] =
+            $this->db->get('produk')->result();
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar');
-
         $this->load->view('laporan/produk', $data);
-
         $this->load->view('templates/footer');
     }
 
-
-
     // =========================
-    // LAPORAN PERIODE
+    // LAPORAN PER PERIODE
     // =========================
     public function periode()
     {
-
         $tanggal_awal =
             $this->input->get('tanggal_awal');
 
         $tanggal_akhir =
             $this->input->get('tanggal_akhir');
 
-
-
         $this->db->select("
-            orders.kode_order,
-            orders.tanggal,
+            sales_order.kode_order,
+            sales_order.tanggal,
 
-            sales.id_sales,
+            pelanggan.nama_pelanggan,
+
             sales.nama_sales,
 
-            pelanggan.nama_pelanggan AS pelanggan,
+            produk.nama_produk,
 
-            produk.nama_produk AS produk,
+            sales_order.qty,
 
-            detail_order.qty,
+            sales_order.total_harga,
 
-            detail_order.subtotal AS total,
-
-            orders.status
+            sales_order.status
         ");
 
-        $this->db->from('orders');
-
-        $this->db->join(
-            'sales',
-            'orders.id_sales = sales.id_sales'
-        );
+        $this->db->from('sales_order');
 
         $this->db->join(
             'pelanggan',
-            'orders.id_pelanggan = pelanggan.id_pelanggan'
+            'pelanggan.id_pelanggan = sales_order.id_pelanggan'
         );
 
         $this->db->join(
-            'detail_order',
-            'orders.id_order = detail_order.id_order'
+            'sales',
+            'sales.id_sales = sales_order.id_sales'
         );
 
         $this->db->join(
             'produk',
-            'detail_order.id_produk = produk.id_produk'
+            'produk.id_produk = sales_order.id_produk'
         );
 
-
-
-        // FILTER TANGGAL
-        if($tanggal_awal && $tanggal_akhir){
-
+        if(
+            !empty($tanggal_awal)
+            &&
+            !empty($tanggal_akhir)
+        )
+        {
             $this->db->where(
-                'orders.tanggal >=',
+                'sales_order.tanggal >=',
                 $tanggal_awal
             );
 
             $this->db->where(
-                'orders.tanggal <=',
+                'sales_order.tanggal <=',
                 $tanggal_akhir
             );
         }
 
-        $data['sales'] = $this->db->get()->result();
-
-
+        $data['laporan'] =
+            $this->db->get()->result();
 
         $this->load->view('templates/header');
         $this->load->view('templates/sidebar');
         $this->load->view('templates/topbar');
-
         $this->load->view('laporan/periode', $data);
-
         $this->load->view('templates/footer');
     }
 }

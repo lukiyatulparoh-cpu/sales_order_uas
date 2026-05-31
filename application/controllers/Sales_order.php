@@ -107,6 +107,17 @@ class Sales_order extends CI_Controller {
         $this->load->view('templates/footer');
     }
 
+    
+        if($qty > $produk->stok){
+
+            $this->session->set_flashdata(
+                'error',
+                'Stok tidak mencukupi'
+            );
+
+            redirect('sales_order/tambah');
+        }
+    
     // ==========================================
     // SIMPAN DATA
     // ==========================================
@@ -208,6 +219,21 @@ class Sales_order extends CI_Controller {
             ];
 
             $this->Sales_order_model->insert($data);
+            // kurangi stok produk
+
+                $stok_baru = $produk->stok - $qty;
+
+                $this->db->where(
+                    'id_produk',
+                    $id_produk
+                );
+
+                $this->db->update(
+                    'produk',
+                    [
+                        'stok' => $stok_baru
+                    ]
+                );
 
             redirect('sales_order');
         }

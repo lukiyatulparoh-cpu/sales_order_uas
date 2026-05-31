@@ -8,11 +8,9 @@
 
     <title>Sales Order System</title>
 
-    <!-- Font Awesome -->
     <link href="<?= base_url('assets/vendor/fontawesome-free/css/all.min.css');?>"
         rel="stylesheet">
 
-    <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
 
@@ -27,15 +25,15 @@
 
         body{
 
-            min-height:100vh;
+            height:100vh;
 
-            padding:40px;
+            padding:20px;
 
             display:flex;
             justify-content:center;
             align-items:center;
 
-            overflow:auto;
+            overflow:hidden;
 
             background:
             linear-gradient(
@@ -47,8 +45,6 @@
 
             position:relative;
         }
-
-        /* Background Blur */
 
         .blob1,
         .blob2{
@@ -64,39 +60,37 @@
 
         .blob1{
 
-            width:350px;
-            height:350px;
+            width:280px;
+            height:280px;
 
             background:#d8c3a5;
 
-            top:-100px;
-            left:-100px;
+            top:-80px;
+            left:-80px;
         }
 
         .blob2{
 
-            width:320px;
-            height:320px;
+            width:280px;
+            height:280px;
 
             background:#eadbc8;
 
-            bottom:-100px;
-            right:-100px;
+            bottom:-80px;
+            right:-80px;
         }
-
-        /* Main Card */
 
         .login-card{
 
-            width:1000px;
+            width:980px;
 
-            min-height:600px;
+            height:550px;
 
-            background:rgba(255,255,255,0.65);
+            max-width:95%;
+
+            background:rgba(255,255,255,0.75);
 
             backdrop-filter:blur(20px);
-
-            border:1px solid rgba(255,255,255,0.4);
 
             border-radius:35px;
 
@@ -105,39 +99,44 @@
             display:flex;
 
             box-shadow:
-            0 20px 60px rgba(0,0,0,0.08);
+            0 25px 70px rgba(0,0,0,.08);
 
-            z-index:10;
-
-            transition:0.4s ease;
         }
 
         .login-card:hover{
 
-            transform:translateY(-5px);
+            transform:translateY(-3px);
         }
 
-        /* Left Side */
+        /* LEFT */
 
-        .left-side{
+       .left-side{
 
-            width:50%;
+            width:60%;
 
-            padding:70px;
+            padding:40px 50px;
+
+            background:
+            linear-gradient(
+                135deg,
+                #f8f6f2,
+                #f3efe8
+            );
 
             display:flex;
+
             flex-direction:column;
+
             justify-content:center;
 
-            position:relative;
         }
 
         .logo-box{
 
-            width:95px;
-            height:95px;
+            width:75px;
+            height:75px;
 
-            border-radius:28px;
+            border-radius:22px;
 
             background:
             linear-gradient(
@@ -152,23 +151,27 @@
 
             color:white;
 
-            font-size:42px;
+            font-size:30px;
 
-            margin-bottom:35px;
+            margin-bottom:25px;
 
             box-shadow:
-            0 12px 30px rgba(199,161,122,0.3);
+            0 12px 25px rgba(199,161,122,0.25);
         }
 
         .left-side h1{
+           
+    font-size:32px;
 
-            font-size:52px;
+    margin-bottom:10px;
 
-            line-height:1.15;
+            font-size:42px;
+
+            line-height:1.2;
 
             color:#3d352f;
 
-            margin-bottom:22px;
+            margin-bottom:15px;
 
             font-weight:700;
         }
@@ -177,103 +180,96 @@
 
             color:#7b6f66;
 
-            line-height:1.9;
+            line-height:1.8;
 
-            font-size:15px;
-
-            width:90%;
+            font-size:14px;
         }
-
-        /* Mini Card */
 
         .mini-card{
 
-            margin-top:45px;
+            margin-top:30px;
 
             background:white;
 
-            padding:22px;
+            padding:18px;
 
-            border-radius:22px;
+            border-radius:18px;
 
-            width:280px;
+            width:240px;
 
             box-shadow:
-            0 10px 30px rgba(0,0,0,0.05);
+            0 10px 25px rgba(0,0,0,0.05);
         }
 
         .mini-card h3{
 
             color:#3d352f;
 
-            font-size:18px;
+            font-size:16px;
 
-            margin-bottom:5px;
+            margin-bottom:4px;
         }
 
         .mini-card p{
 
             color:#9a8d84;
 
-            font-size:13px;
-
-            width:100%;
+            font-size:12px;
         }
 
-        /* Right Side */
+        /* RIGHT */
 
         .right-side{
 
-            width:50%;
+            width:40%;
 
             background:white;
 
-            padding:70px;
+            padding:40px;
 
             display:flex;
+
             flex-direction:column;
+
             justify-content:center;
+
         }
 
         .top-text{
 
-            margin-bottom:35px;
+            margin-bottom:25px;
         }
 
         .top-text h2{
 
-            font-size:42px;
+            font-size:26px;
 
             color:#3d352f;
 
-            margin-bottom:10px;
-
-            font-weight:700;
+            margin-bottom:8px;
         }
 
         .top-text p{
 
             color:#8b8178;
 
-            font-size:15px;
+            font-size:14px;
         }
-
-        /* Input */
 
         .input-group{
 
-            margin-bottom:22px;
+            margin-bottom:18px;
         }
 
         .input-group label{
 
             display:block;
 
-            margin-bottom:10px;
+            margin-bottom:8px;
 
             color:#5e554f;
 
-            font-size:14px;
+            font-size:13px;
 
             font-weight:500;
         }
@@ -282,11 +278,11 @@
 
             width:100%;
 
-            padding:18px;
+            padding:13px;
 
             border:none;
 
-            border-radius:18px;
+            border-radius:15px;
 
             background:#f6f3ef;
 
@@ -294,7 +290,7 @@
 
             font-size:14px;
 
-            transition:0.3s;
+            transition:.3s;
         }
 
         .input-group input:focus{
@@ -302,20 +298,18 @@
             background:#efe8df;
 
             box-shadow:
-            0 0 0 4px rgba(199,161,122,0.2);
+            0 0 0 4px rgba(199,161,122,0.15);
         }
-
-        /* Button */
 
         .btn-login{
 
             width:100%;
 
-            padding:18px;
+            padding:13px;
 
             border:none;
 
-            border-radius:18px;
+            border-radius:15px;
 
             background:
             linear-gradient(
@@ -326,13 +320,13 @@
 
             color:white;
 
-            font-size:16px;
+            font-size:15px;
 
             font-weight:600;
 
             cursor:pointer;
 
-            transition:0.3s;
+            transition:.3s;
 
             margin-top:10px;
         }
@@ -342,10 +336,8 @@
             transform:translateY(-2px);
 
             box-shadow:
-            0 15px 30px rgba(199,161,122,0.35);
+            0 15px 25px rgba(199,161,122,0.30);
         }
-
-        /* Error */
 
         .alert{
 
@@ -353,39 +345,141 @@
 
             color:#b91c1c;
 
-            padding:14px;
+            padding:12px;
 
-            border-radius:14px;
+            border-radius:12px;
 
-            margin-bottom:20px;
+            margin-bottom:15px;
 
-            font-size:14px;
+            font-size:13px;
         }
-
-        /* Footer */
 
         .footer{
 
-            margin-top:25px;
+            margin-top:20px;
 
             text-align:center;
 
             color:#a89d95;
 
-            font-size:13px;
+            font-size:12px;
         }
+        .dashboard-preview{
 
-        /* Responsive */
+    display:flex;
 
-        @media(max-width:950px){
+    gap:15px;
+
+    margin-top:30px;
+
+}
+
+.stat-box{
+
+    flex:1;
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    text-align:center;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.05);
+
+}
+
+.stat-box h2{
+
+    color:#c7a17a;
+
+    font-size:20px;
+
+    margin-bottom:5px;
+
+}
+
+.stat-box span{
+
+    color:#888;
+
+    font-size:13px;
+
+}
+
+.preview-card{
+
+    margin-top:20px;
+
+    background:white;
+
+    padding:18px;
+
+    border-radius:20px;
+
+    box-shadow:
+    0 10px 25px rgba(0,0,0,.05);
+
+}
+
+.preview-card h4{
+
+    color:#3d352f;
+
+    margin-bottom:15px;
+
+}
+
+.mini-row{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    margin-bottom:12px;
+
+    color:#666;
+
+}
+
+        .input-wrapper{
+
+    position:relative;
+
+}
+
+.input-wrapper i{
+
+    position:absolute;
+
+    left:18px;
+
+    top:16px;
+
+    color:#b9a79a;
+
+}
+
+.input-wrapper input{
+
+    padding-left:50px;
+
+}
+
+        @media(max-width:900px){
 
             body{
+
+                height:auto;
+
+                overflow:auto;
+
                 padding:20px;
             }
 
             .login-card{
-
-                width:100%;
 
                 height:auto;
 
@@ -400,23 +494,24 @@
 
             .left-side{
 
-                padding:50px 35px;
+                padding:35px;
             }
 
             .right-side{
 
-                padding:50px 35px;
+                padding:35px;
             }
 
             .left-side h1{
 
-                font-size:40px;
+                font-size:32px;
             }
 
             .top-text h2{
 
-                font-size:34px;
+                font-size:28px;
             }
+
         }
 
     </style>
@@ -425,60 +520,107 @@
 
 <body>
 
-    <!-- Background Blur -->
     <div class="blob1"></div>
     <div class="blob2"></div>
 
-    <!-- Login Card -->
     <div class="login-card">
 
-        <!-- LEFT -->
         <div class="left-side">
-
             <div class="logo-box">
 
-                <i class="fas fa-box-open"></i>
+    <i class="fas fa-chart-line"></i>
 
-            </div>
+</div>
 
-            <h1>
-                Sales Order
-                <br>
-                Management
-            </h1>
+<h1>
+    Sales Order
+    <br>
+    Management System
+</h1>
 
-            <p>
-                Sistem modern untuk mengelola penjualan,
-                pelanggan, dan distribusi produk elektronik
-                dengan lebih efisien, cepat, dan profesional.
-            </p>
+<p>
 
-            <div class="mini-card">
+    Kelola produk, pelanggan,
+    sales order, dan laporan
+    dalam satu sistem yang
+    cepat, modern, dan efisien.
 
-                <h3>PT Maju Jaya</h3>
+</p>
 
-                <p>
-                    Distribution & Electronic Supplier
-                </p>
+<div class="dashboard-preview">
 
-            </div>
+    <div class="stat-box">
 
+        <h2>80+</h2>
+
+        <span>Products</span>
+
+    </div>
+
+    <div class="stat-box">
+
+        <h2>120+</h2>
+
+        <span>Customers</span>
+
+    </div>
+
+    <div class="stat-box">
+
+        <h2>500+</h2>
+
+        <span>Orders</span>
+
+    </div>
+
+</div>
+
+<div class="preview-card">
+
+    <h4>System Overview</h4>
+
+    <div class="mini-row">
+
+        <span>Total Sales</span>
+
+        <strong>Rp 125 Juta</strong>
+
+    </div>
+
+    <div class="mini-row">
+
+        <span>Active Customers</span>
+
+        <strong>320</strong>
+
+    </div>
+
+    <div class="mini-row">
+
+        <span>Products</span>
+
+        <strong>150</strong>
+
+    </div>
+
+</div>
         </div>
 
-        <!-- RIGHT -->
         <div class="right-side">
 
             <div class="top-text">
 
-                <h2>Hello Again 👋</h2>
+                <h2>Welcome Back 👋</h2>
 
-                <p>
-                    Please login to continue
-                </p>
+<p>
+
+Sign in to access your
+Sales Order Dashboard
+
+</p>
 
             </div>
 
-            <!-- Error -->
             <?php if($this->session->flashdata('error')): ?>
 
                 <div class="alert">
@@ -489,7 +631,6 @@
 
             <?php endif; ?>
 
-            <!-- FORM LOGIN -->
             <form method="post"
                 action="<?= site_url('auth/login');?>">
 
@@ -497,10 +638,17 @@
 
                     <label>Username</label>
 
-                    <input type="text"
-                        name="username"
-                        placeholder="Enter your username"
-                        required>
+                    <div class="input-wrapper">
+
+                        <i class="fas fa-user"></i>
+
+                        <input
+                            type="text"
+                            name="username"
+                            placeholder="Enter username"
+                            required>
+
+                    </div>
 
                 </div>
 
@@ -508,17 +656,26 @@
 
                     <label>Password</label>
 
-                    <input type="password"
-                        name="password"
-                        placeholder="Enter your password"
-                        required>
+                    <div class="input-wrapper">
+
+                        <i class="fas fa-lock"></i>
+
+                        <input
+                            type="password"
+                            name="password"
+                            placeholder="Enter password"
+                            required>
+
+                    </div>
 
                 </div>
-
-                <button type="submit"
+                <button
+                    type="submit"
                     class="btn-login">
 
-                    Login Account
+                    <i class="fas fa-sign-in-alt"></i>
+
+ Sign In
 
                 </button>
 
@@ -535,5 +692,4 @@
     </div>
 
 </body>
-
 </html>
