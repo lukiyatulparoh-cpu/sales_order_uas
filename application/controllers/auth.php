@@ -12,42 +12,71 @@ class auth extends CI_Controller {
     }
 
     public function index()
-    {
-        $this->load->view('auth/login');
-    }
+{
+    $data['total_produk'] =
+        $this->db->count_all('produk');
+
+    $data['total_pelanggan'] =
+        $this->db->count_all('pelanggan');
+
+    $data['total_order'] =
+        $this->db->count_all('sales_order');
+
+    $this->db->select_sum('total_harga');
+    $penjualan =
+        $this->db->get('sales_order')->row();
+
+    $data['total_penjualan'] =
+        $penjualan->total_harga;
+
+    $this->load->view(
+        'auth/login',
+        $data
+    );
+}
 
     public function login()
-    {
-        $username = $this->input->post('username');
-        $password = $this->input->post('password');
+{
+    $username = $this->input->post('username');
 
-        $user = $this->auth_model->cek_login($username, $password);
+    // tambahkan md5
+    $password = md5(
+        $this->input->post('password')
+    );
 
-        if($user){
+    $user = $this->auth_model->cek_login(
+        $username,
+        $password
+    );
 
-            $data = [
-                'id_user'  => $user->id,
-                'username' => $user->username,
-                'role'     => $user->role,
-                'login'    => TRUE
-            ];
+    if($user){
 
-            $this->session->set_userdata($data);
+        $data = [
+            'id_user'  => $user->id,
+            'username' => $user->username,
+            'role'     => $user->role,
+            'login'    => TRUE
+        ];
 
-            $this->auth_model->update_last_login($user->id);
+        $this->session->set_userdata($data);
 
-            redirect('dashboard');
+        $this->auth_model->update_last_login(
+            $user->id
+        );
 
-        } else {
+        redirect('dashboard');
 
-            $this->session->set_flashdata(
-                'error',
-                'Username atau Password salah!'
-            );
+    } else {
 
-            redirect('auth');
-        }
+        $this->session->set_flashdata(
+            'error',
+            'Username atau Password salah!'
+        );
+
+        redirect('auth');
     }
+}
+    
 
     public function logout()
     {

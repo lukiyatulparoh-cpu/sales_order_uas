@@ -148,28 +148,22 @@
 
                                 <?php if($this->session->userdata('role') == 'admin') : ?>
 
-                                <a href="<?= base_url('sales_order/hapus/'.$s->id_order) ?>" 
-                                class="btn btn-sm mb-2"
-                                style="
-                                background:#d96c6c;
-                                color:white;
-                                border-radius:10px;
-                                display:block;
-                                " 
-                                onclick="return confirm('Yakin hapus data?')">
+                                <a href="<?= base_url('sales_order/edit/'.$s->id_order) ?>"
+                                class="btn btn-circle btn-sm"
+                                style="background:#f6c23e;color:white;"
+                                title="Edit">
 
-                                Hapus
+                                <i class="fas fa-edit"></i>
 
                                 </a>
 
-                                <a href="<?= base_url('sales_order/edit/'.$s->id_order) ?>"
-                                class="btn btn-warning btn-sm"
-                                style="
-                                border-radius:10px;
-                                display:block;
-                                ">
+                                <a href="<?= base_url('sales_order/hapus/'.$s->id_order) ?>"
+                                class="btn btn-circle btn-sm"
+                                style="background:#e74a3b;color:white;"
+                                title="Hapus"
+                                onclick="return confirm('Yakin hapus data ini?')">
 
-                                Edit
+                                <i class="fas fa-trash"></i>
 
                                 </a>
 

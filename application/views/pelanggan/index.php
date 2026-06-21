@@ -68,26 +68,23 @@
                             </td>
 
                             <td class="text-center">
+                                <a href="<?= base_url('pelanggan/edit/'.$p->id_pelanggan) ?>"
+                                class="btn btn-circle btn-sm"
+                                style="background:#f6c23e;color:white;"
+                                title="Edit">
 
-                                <a href="<?= base_url('pelanggan/edit/'.$p->id_pelanggan) ?>" 
-                                   class="btn btn-sm"
-                                   style="
-                                   background:#f0c674;
-                                   color:white;
-                                   border-radius:10px;
-                                   ">
-                                   Edit
+                                <i class="fas fa-edit"></i>
+
                                 </a>
 
-                                <a href="<?= base_url('pelanggan/hapus/'.$p->id_pelanggan) ?>" 
-                                   class="btn btn-sm"
-                                   style="
-                                   background:#d96c6c;
-                                   color:white;
-                                   border-radius:10px;
-                                   "
-                                   onclick="return confirm('Yakin hapus data?')">
-                                   Hapus
+                                <a href="<?= base_url('pelanggan/hapus/'.$p->id_pelanggan) ?>"
+                                class="btn btn-circle btn-sm"
+                                style="background:#e74a3b;color:white;"
+                                title="Hapus"
+                                onclick="return confirm('Yakin hapus data ini?')">
+
+                                <i class="fas fa-trash"></i>
+
                                 </a>
 
                             </td>

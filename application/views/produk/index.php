@@ -100,25 +100,23 @@
 
                             <td class="text-center">
 
-                                <a href="<?= base_url('produk/edit/'.$p->id_produk) ?>" 
-                                   class="btn btn-sm"
-                                   style="
-                                   background:#f0c674;
-                                   color:white;
-                                   border-radius:10px;
-                                   ">
-                                   Edit
+                                <a href="<?= base_url('produk/edit/'.$p->id_produk) ?>"
+                                class="btn btn-circle btn-sm"
+                                style="background:#f6c23e;color:white;"
+                                title="Edit">
+
+                                <i class="fas fa-edit"></i>
+
                                 </a>
 
-                                <a href="<?= base_url('produk/hapus/'.$p->id_produk) ?>" 
-                                   class="btn btn-sm"
-                                   style="
-                                   background:#d96c6c;
-                                   color:white;
-                                   border-radius:10px;
-                                   "
-                                   onclick="return confirm('Yakin hapus data?')">
-                                   Hapus
+                                <a href="<?= base_url('produk/hapus/'.$p->id_produk) ?>"
+                                class="btn btn-circle btn-sm"
+                                style="background:#e74a3b;color:white;"
+                                title="Hapus"
+                                onclick="return confirm('Yakin hapus data ini?')">
+
+                                <i class="fas fa-trash"></i>
+
                                 </a>
 
                             </td>

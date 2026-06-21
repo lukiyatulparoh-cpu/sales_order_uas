@@ -514,6 +514,26 @@
 
         }
 
+
+    .register-link{
+
+    text-align:center;
+
+    margin-top:15px;
+
+    color:#666;
+
+    font-size:14px;
+}
+
+.register-link a{
+
+    color:#FDB515;
+
+    font-weight:600;
+
+    text-decoration:none;
+}
     </style>
 
 </head>
@@ -551,25 +571,20 @@
 
     <div class="stat-box">
 
-        <h2>80+</h2>
-
-        <span>Products</span>
-
+        <h2><?= $total_produk ?></h2>
+<span>Products</span>
     </div>
 
     <div class="stat-box">
 
-        <h2>120+</h2>
-
-        <span>Customers</span>
-
+        <h2><?= $total_pelanggan ?></h2>
+<span>Customers</span>
     </div>
 
     <div class="stat-box">
 
-        <h2>500+</h2>
-
-        <span>Orders</span>
+        <h2><?= $total_order ?></h2>
+<span>Orders</span>
 
     </div>
 
@@ -581,25 +596,45 @@
 
     <div class="mini-row">
 
-        <span>Total Sales</span>
+        <span>Total Penjualan</span>
 
-        <strong>Rp 125 Juta</strong>
-
-    </div>
-
-    <div class="mini-row">
-
-        <span>Active Customers</span>
-
-        <strong>320</strong>
+        <strong>
+            Rp <?= number_format($total_penjualan,0,',','.') ?>
+        </strong>
 
     </div>
 
     <div class="mini-row">
 
-        <span>Products</span>
+        <span>Total Produk</span>
 
-        <strong>150</strong>
+        <strong><?= $total_produk ?></strong>
+
+    </div>
+
+    <div class="mini-row">
+
+        <span>Total Pelanggan</span>
+
+        <strong><?= $total_pelanggan ?></strong>
+
+    </div>
+
+    <div class="mini-row">
+
+        <span>Total Order</span>
+
+        <strong><?= $total_order ?></strong>
+
+    </div>
+
+    <div class="mini-row">
+
+        <span>Role System</span>
+
+        <strong>
+            Admin • Sales • Manager
+        </strong>
 
     </div>
 
@@ -678,6 +713,7 @@ Sales Order Dashboard
  Sign In
 
                 </button>
+                
 
             </form>
 

@@ -108,16 +108,6 @@ class Sales_order extends CI_Controller {
     }
 
     
-        if($qty > $produk->stok){
-
-            $this->session->set_flashdata(
-                'error',
-                'Stok tidak mencukupi'
-            );
-
-            redirect('sales_order/tambah');
-        }
-    
     // ==========================================
     // SIMPAN DATA
     // ==========================================
@@ -169,6 +159,19 @@ class Sales_order extends CI_Controller {
                                     'id_produk' => $id_produk
                                 ]
                             )->row();
+
+            // VALIDASI STOK
+            if($qty > $produk->stok){
+
+                $this->session->set_flashdata(
+                    'error',
+                    'Stok tidak mencukupi. Stok tersedia hanya '.$produk->stok
+                );
+
+                redirect('sales_order/tambah');
+
+                return;
+            }
 
             // hitung total
             $total = $produk->harga * $qty;
@@ -304,5 +307,83 @@ public function update_status()
 
         redirect('sales_order');
     }
+    public function edit($id)
+{
+    if($this->session->userdata('role') != 'admin'){
+        redirect('sales_order');
+    }
+
+    $data['order'] = $this->db
+        ->get_where(
+            'sales_order',
+            ['id_order' => $id]
+        )->row();
+
+    $data['pelanggan'] =
+        $this->db->get('pelanggan')->result();
+
+    $data['produk'] =
+        $this->db->get('produk')->result();
+
+    $this->load->view('templates/header');
+    $this->load->view('templates/sidebar');
+    $this->load->view('templates/topbar');
+
+    $this->load->view(
+        'sales_order/edit',
+        $data
+    );
+
+    $this->load->view('templates/footer');
+}
+public function update()
+{
+    $id_order = $this->input->post('id_order');
+
+    $id_produk = $this->input->post('id_produk');
+
+    $qty = $this->input->post('qty');
+
+    $produk = $this->db
+        ->get_where(
+            'produk',
+            [
+                'id_produk' => $id_produk
+            ]
+        )->row();
+
+    $total =
+        $produk->harga * $qty;
+
+    $data = [
+
+        'id_pelanggan' =>
+            $this->input->post('id_pelanggan'),
+
+        'id_produk' =>
+            $id_produk,
+
+        'qty' =>
+            $qty,
+
+        'total_harga' =>
+            $total,
+
+        'status' =>
+            $this->input->post('status')
+    ];
+
+    $this->db->where(
+        'id_order',
+        $id_order
+    );
+
+    $this->db->update(
+        'sales_order',
+        $data
+    );
+
+    redirect('sales_order');
+}
 
 }
