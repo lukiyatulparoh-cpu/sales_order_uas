@@ -129,27 +129,27 @@ Relasi antar tabel digunakan untuk menghubungkan data pelanggan, produk, sales, 
 
 ### Login
 
-![Login](screenshots/login.png)
+![Login](screenshots/login.jpeg)
 
 ### Dashboard
 
-![Dashboard](screenshots/dashboard.png)
+![Dashboard](screenshots/dashboard.jpeg)
 
 ### Data Produk
 
-![Produk](screenshots/produk.png)
+![Produk](screenshots/produk.jpeg)
 
 ### Data Pelanggan
 
-![Pelanggan](screenshots/pelanggan.png)
+![Pelanggan](screenshots/pelanggan.jpeg)
 
 ### Sales Order
 
-![Sales Order](screenshots/sales_order.png)
+![Sales Order](screenshots/sales_order.jpeg)
 
 ### Laporan
 
-![Laporan](screenshots/laporan.png)
+![Laporan](screenshots/laporan.jpeg)
 
 ---
 
@@ -163,38 +163,20 @@ Password : admin123
 
 ### Sales
 
-Username : sales01
+Username : tina
 
-Password : sales123
+Password : tina123
 
 ### Manager
 
-Username : manager01
+Username : lulu
 
-Password : manager123
+Password : lulu123
 
 > Sesuaikan dengan data yang tersedia pada database.
 
 ---
 
-## ⚙️ Cara Menjalankan Aplikasi
-
-1. Clone repository ini.
-2. Import database ke phpMyAdmin.
-3. Sesuaikan konfigurasi database pada file:
-
-```text
-application/config/database.php
-```
-
-4. Jalankan Apache dan MySQL melalui XAMPP.
-5. Buka browser dan akses:
-
-```text
-http://localhost/sales_order_uas
-```
-
----
 
 ## 👨‍🎓 Pengembang
 
@@ -202,6 +184,6 @@ Nama : Lukiyatul Paroh
 
 Program Studi : Sistem Informasi Manajemen
 
-Mata Kuliah : Pemrograman Web
+Mata Kuliah : Pemrograman Web II
 
 Tahun : 2026
